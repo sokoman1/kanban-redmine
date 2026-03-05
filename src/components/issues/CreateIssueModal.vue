@@ -2,7 +2,7 @@
   <div v-if="isOpen" class="modal-overlay" @click.self="close">
     <div class="modal-content">
       <div class="modal-header">
-        <h2>Создать задачу</h2>
+        <h2>Create issue</h2>
         <button class="btn-close" @click="close">×</button>
       </div>
 
@@ -14,14 +14,14 @@
       <form @submit.prevent="handleSubmit">
         <div class="form-group">
           <label class="form-label" for="subject">
-            Тема *
+            Subject *
           </label>
           <input
             id="subject"
             v-model="formData.subject"
             type="text"
             class="form-input"
-            placeholder="Введите тему задачи"
+            placeholder="Enter issue subject"
             required
           />
           <div v-if="validationErrors.subject" class="error-message">
@@ -31,26 +31,26 @@
 
         <div class="form-group">
           <label class="form-label" for="description">
-            Описание
+            Description
           </label>
           <textarea
             id="description"
             v-model="formData.description"
             class="form-textarea"
-            placeholder="Опишите задачу (необязательно)"
+            placeholder="Describe the issue (optional)"
           />
         </div>
 
         <div v-if="trackers.length > 0" class="form-group">
           <label class="form-label" for="tracker">
-            Трекер
+            Tracker
           </label>
           <select
             id="tracker"
             v-model="formData.trackerId"
             class="form-input"
           >
-            <option :value="null">Не выбран</option>
+            <option :value="null">Not selected</option>
             <option
               v-for="tracker in trackers"
               :key="tracker.id"
@@ -63,10 +63,10 @@
 
         <div class="modal-actions">
           <button type="button" class="btn btn-secondary" @click="close">
-            Отмена
+            Cancel
           </button>
           <button type="submit" class="btn btn-success" :disabled="loading">
-            {{ loading ? 'Создание...' : 'Создать' }}
+            {{ loading ? 'Creating...' : 'Create' }}
           </button>
         </div>
       </form>

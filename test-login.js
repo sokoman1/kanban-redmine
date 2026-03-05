@@ -39,7 +39,7 @@ async function testLogin() {
     console.log(`\n✅ Test Complete: Login would succeed and redirect to /projects page`);
     console.log(`\nExpected Flow:`);
     console.log(`  1. User enters credentials on http://localhost:5173`);
-    console.log(`  2. Click "Войти" button`);
+    console.log(`  2. Click "Log in" button`);
     console.log(`  3. App validates credentials by fetching projects`);
     console.log(`  4. Credentials saved to localStorage`);
     console.log(`  5. Redirect to /projects (Project Picker Page)`);

@@ -3,7 +3,7 @@
     <div class="container">
       <div class="login-card card">
         <h1>Kanban Redmine</h1>
-        <p class="subtitle">Введите настройки подключения к Redmine</p>
+        <p class="subtitle">Enter Redmine connection settings</p>
 
         <AppErrorBanner 
           :error="error" 
@@ -37,14 +37,14 @@
               v-model="formData.apiKey"
               type="password"
               class="form-input"
-              placeholder="Введите API key"
+              placeholder="Enter API key"
               required
             />
             <div v-if="validationErrors.apiKey" class="error-message">
               {{ validationErrors.apiKey }}
             </div>
             <small style="display: block; margin-top: 5px; color: #666;">
-              API key можно найти в Redmine: Моя учетная запись → Справа "Ключ для доступа к API"
+              API key can be found in Redmine: My account → on the right "API access key"
             </small>
           </div>
 
@@ -53,7 +53,7 @@
             class="btn btn-primary btn-full"
             :disabled="loading"
           >
-            {{ loading ? 'Проверка...' : 'Войти' }}
+            {{ loading ? 'Checking...' : 'Log in' }}
           </button>
         </form>
       </div>

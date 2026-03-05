@@ -6,7 +6,7 @@
     </div>
     <div class="error-actions">
       <button v-if="onRetry" @click="onRetry" class="btn btn-secondary btn-sm">
-        Повторить
+        Retry
       </button>
       <button @click="$emit('close')" class="btn-close">×</button>
     </div>

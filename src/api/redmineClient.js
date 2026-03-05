@@ -20,7 +20,7 @@ function getEffectiveBaseUrl(baseUrl) {
 
 export function createRedmineClient(baseUrl, apiKey) {
   if (!baseUrl || !apiKey) {
-    throw new RedmineError('Не указаны baseUrl или apiKey')
+    throw new RedmineError('baseUrl or apiKey is not set')
   }
 
   const effectiveBaseUrl = getEffectiveBaseUrl(baseUrl)
@@ -66,10 +66,10 @@ export function createRedmineClient(baseUrl, apiKey) {
         const text = await response.text()
         if (text.trim().startsWith('<')) {
           throw new RedmineError(
-            'Сервер вернул HTML вместо JSON. Проверьте URL Redmine — возможно, указан неверный адрес или порт. Убедитесь, что это сервер Redmine, а не приложение Kanban.'
+            'Server returned HTML instead of JSON. Check Redmine URL — wrong address or port, or this may be the Kanban app instead of Redmine.'
           )
         }
-        throw new RedmineError('Сервер вернул неожиданный формат ответа')
+        throw new RedmineError('Server returned an unexpected response format')
       }
 
       return await response.json()
@@ -77,7 +77,7 @@ export function createRedmineClient(baseUrl, apiKey) {
       clearTimeout(timeoutId)
 
       if (error.name === 'AbortError') {
-        throw new RedmineError('Превышено время ожидания запроса')
+        throw new RedmineError('Request timeout exceeded')
       }
 
       const message = normalizeError(error)

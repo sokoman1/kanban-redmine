@@ -8,7 +8,7 @@
     </div>
     <h4 class="issue-subject">{{ issue.subject }}</h4>
     <div v-if="issue.assigned_to" class="issue-assignee">
-      Назначена: {{ issue.assigned_to.name }}
+      Assigned: {{ issue.assigned_to.name }}
     </div>
     <div v-if="issue.priority" class="issue-priority" :class="priorityClass">
       {{ issue.priority.name }}

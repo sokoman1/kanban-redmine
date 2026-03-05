@@ -69,7 +69,7 @@ export async function createIssue(client, issueData) {
   })
   const issue = response?.issue
   if (!issue) {
-    throw new Error('Сервер не вернул созданную задачу')
+    throw new Error('Server did not return the created issue')
   }
   return issue
 }

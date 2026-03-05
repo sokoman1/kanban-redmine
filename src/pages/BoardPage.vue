@@ -4,15 +4,15 @@
       <div class="header-left">
         <h1>{{ projectName }}</h1>
         <button @click="handleChangeProject" class="btn btn-secondary btn-sm">
-          Сменить проект
+          Change project
         </button>
       </div>
       <div class="header-right">
         <button @click="openCreateModal" class="btn btn-success">
-          + Создать задачу
+          + Create issue
         </button>
         <button @click="handleRefresh" class="btn btn-secondary" :disabled="loading">
-          {{ loading ? 'Обновление...' : '↻ Обновить' }}
+          {{ loading ? 'Refreshing...' : '↻ Refresh' }}
         </button>
       </div>
     </div>
@@ -36,7 +36,7 @@
     </div>
 
     <div v-else class="empty-state">
-      <p>Нет данных для отображения</p>
+      <p>No data to display</p>
     </div>
 
     <CreateIssueModal
@@ -89,7 +89,7 @@ export default {
   },
   computed: {
     projectName() {
-      return this.authStore.selectedProject?.name || 'Без названия'
+      return this.authStore.selectedProject?.name || 'Untitled'
     }
   },
   mounted() {

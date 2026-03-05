@@ -1,134 +1,133 @@
 # Kanban Redmine
 
-Простое web-приложение для работы с задачами Redmine в виде Kanban-доски.
+A simple web application for working with Redmine issues as a Kanban board.
 
-## Возможности
+## Features
 
-- 🔐 Авторизация через API key Redmine
-- 📋 Выбор проекта из списка доступных
-- 📊 Kanban-доска с колонками по статусам задач
-- ✨ Drag & Drop для перемещения задач между статусами
-- ➕ Создание новых задач
-- 🔄 Автоматическая синхронизация с Redmine
-- 💾 Сохранение настроек в localStorage
+- 🔐 Authentication via Redmine API key
+- 📋 Project selection from the list of available projects
+- 📊 Kanban board with columns by issue status
+- ✨ Drag & Drop to move issues between statuses
+- ➕ Create new issues
+- 🔄 Automatic sync with Redmine
+- 💾 Settings saved in localStorage
 
-## Технологии
+## Tech Stack
 
-- **Vue 3** — реактивный UI-фреймворк
-- **Vite** — сборщик и dev-сервер
-- **Pinia** — управление состоянием (immutable patterns)
-- **Vue Router** — маршрутизация
+- **Vue 3** — reactive UI framework
+- **Vite** — build tool and dev server
+- **Pinia** — state management (immutable patterns)
+- **Vue Router** — routing
 - **SortableJS** — drag & drop
-- **Zod** — валидация данных
+- **Zod** — data validation
 
-## Установка и запуск
+## Installation and Running
 
-### Требования
+### Requirements
 
 - Node.js >= 16
-- npm или yarn
-- Доступ к серверу Redmine с API
+- npm or yarn
+- Access to a Redmine server with API enabled
 
-### Установка зависимостей
+### Install dependencies
 
 ```bash
 npm install
 ```
 
-### Режим разработки
+### Development mode
 
 ```bash
 npm run dev
 ```
 
-Приложение будет доступно по адресу: `http://localhost:5173` (порт можно изменить через `VITE_DEV_PORT` в `.env`)
+The app will be available at `http://localhost:5173` (port can be changed via `VITE_DEV_PORT` in `.env`).
 
-### Production сборка
+### Production build
 
 ```bash
 npm run build
 ```
 
-Готовые файлы будут в папке `dist/`.
+Output will be in the `dist/` folder.
 
-### Предпросмотр production-сборки
+### Preview production build
 
 ```bash
 npm run preview
 ```
 
-## Настройка Redmine
+## Redmine Setup
 
-### Как получить API key
+### How to get an API key
 
-1. Войдите в свой Redmine
-2. Перейдите в **"Моя учетная запись"** (My account)
-3. Справа найдите раздел **"Ключ для доступа к API"** (API access key)
-4. Если ключа нет, нажмите **"Показать"** или **"Сгенерировать"**
-5. Скопируйте ключ
+1. Log in to your Redmine
+2. Go to **My account**
+3. On the right, find **API access key**
+4. If there is no key, click **Show** or **Generate**
+5. Copy the key
 
-### Формат URL
+### URL format
 
-URL должен указывать на корень вашего Redmine:
+The URL must point to your Redmine root:
 
 ```
-✅ Правильно:
+✅ Correct:
 https://redmine.example.com
 http://localhost:3000
 
-❌ Неправильно:
+❌ Incorrect:
 https://redmine.example.com/
 https://redmine.example.com/projects
 ```
 
-### Проверка доступа к API
+### Verify API access
 
-Убедитесь, что в настройках Redmine включена опция:
-**Администрирование → Настройки → Аутентификация → "Включить REST API"**
+Ensure that in Redmine settings the following option is enabled:
+**Administration → Settings → Authentication → "Enable REST web service"**
 
-## Использование
+## Usage
 
-### 1. Авторизация
+### 1. Authentication
 
-При первом запуске введите:
-- **URL Redmine** — адрес вашего сервера Redmine
-- **API Key** — ключ доступа к API
+On first run, enter:
+- **Redmine URL** — your Redmine server address
+- **API Key** — API access key
 
-Данные сохраняются в localStorage браузера.
+Data is stored in the browser’s localStorage.
 
-### 2. Выбор проекта
+### 2. Project selection
 
-После авторизации выберите проект из списка доступных.
-Приложение запомнит последний выбранный проект.
+After authentication, choose a project from the list. The app remembers the last selected project.
 
-### 3. Работа с доской
+### 3. Working with the board
 
-- **Просмотр задач**: задачи отображаются в колонках по статусам
-- **Перемещение задач**: перетащите карточку задачи в нужную колонку (drag & drop)
-- **Создание задачи**: нажмите кнопку "+ Создать задачу" в шапке
-- **Обновление данных**: нажмите кнопку "↻ Обновить" для синхронизации с Redmine
+- **View issues**: issues are shown in columns by status
+- **Move issues**: drag an issue card to the desired column (drag & drop)
+- **Create issue**: click the "+ Create issue" button in the header
+- **Refresh data**: click "↻ Refresh" to sync with Redmine
 
-### Создание задачи
+### Creating an issue
 
-При создании задачи укажите:
-- **Тема** (обязательно) — краткое описание задачи
-- **Описание** (опционально) — подробное описание
-- **Трекер** (опционально) — тип задачи (Bug, Feature и т.д.). Если не выбран, используется первый трекер проекта.
+When creating an issue, specify:
+- **Subject** (required) — short description
+- **Description** (optional) — detailed description
+- **Tracker** (optional) — issue type (Bug, Feature, etc.). If not selected, the project’s first tracker is used.
 
-Новая задача автоматически получит начальный статус проекта и появится на доске.
+The new issue gets the project’s initial status and appears on the board.
 
-**Примечание**: В форме отображаются только трекеры, назначенные проекту. При ошибке «Объект не может быть пустым» проверьте, что в проекте Redmine нет обязательных пользовательских полей без значений.
+**Note**: Only trackers assigned to the project are shown. If you see "Object cannot be empty", check that the Redmine project has no required custom fields left empty.
 
-## Архитектура
+## Architecture
 
-### Структура проекта
+### Project structure
 
 ```
 kanban-redmine/
 ├── src/
 │   ├── api/
-│   │   ├── redmineClient.js      # HTTP-клиент для Redmine API
-│   │   └── redmineEndpoints.js   # Функции для работы с endpoints
+│   │   ├── redmineClient.js      # HTTP client for Redmine API
+│   │   └── redmineEndpoints.js   # Endpoint helpers
 │   ├── components/
 │   │   ├── common/
 │   │   │   └── AppErrorBanner.vue
@@ -143,13 +142,13 @@ kanban-redmine/
 │   │   ├── LoginPage.vue
 │   │   └── ProjectPickerPage.vue
 │   ├── router/
-│   │   └── index.js              # Конфигурация маршрутов
+│   │   └── index.js              # Route configuration
 │   ├── stores/
-│   │   ├── auth.js               # Store для авторизации
-│   │   └── board.js              # Store для данных доски
+│   │   ├── auth.js               # Auth store
+│   │   └── board.js              # Board data store
 │   ├── utils/
-│   │   ├── errors.js             # Обработка ошибок
-│   │   └── validate.js           # Валидация данных (Zod)
+│   │   ├── errors.js             # Error handling
+│   │   └── validate.js           # Validation (Zod)
 │   ├── App.vue
 │   ├── main.js
 │   └── style.css
@@ -159,7 +158,7 @@ kanban-redmine/
 └── README.md
 ```
 
-### Поток данных
+### Data flow
 
 ```
 LoginPage → ProjectPickerPage → BoardPage
@@ -167,136 +166,134 @@ LoginPage → ProjectPickerPage → BoardPage
 localStorage    Redmine API    Pinia Stores
 ```
 
-### Иммутабельность
+### Immutability
 
-Все изменения состояния выполняются через создание новых объектов/массивов:
+All state changes are done by creating new objects/arrays:
 
 ```javascript
-// ✅ Правильно (иммутабельно)
+// ✅ Correct (immutable)
 this.issues = [...this.issues, newIssue]
 
-// ❌ Неправильно (мутация)
+// ❌ Wrong (mutation)
 this.issues.push(newIssue)
 ```
 
-### Оптимистичные обновления
+### Optimistic updates
 
-При перемещении задачи:
-1. UI обновляется немедленно (оптимистично)
-2. Отправляется запрос в Redmine API
-3. При ошибке — UI откатывается к исходному состоянию
+When moving an issue:
+1. UI updates immediately (optimistic)
+2. Request is sent to Redmine API
+3. On error — UI rolls back to the previous state
 
-## Ограничения и особенности
+## Limitations and notes
 
-### Workflow Redmine
+### Redmine workflow
 
-⚠️ **Важно**: Перемещение задач между статусами ограничено настройками workflow в Redmine.
+⚠️ **Important**: Moving issues between statuses is limited by Redmine workflow settings.
 
-Если в Redmine настроен workflow, который запрещает переход из статуса A в статус B,
-то при попытке перетащить задачу вы получите ошибку, и карточка вернётся на место.
+If the workflow does not allow a transition from status A to status B, dragging the issue will show an error and the card will revert.
 
-**Пример**:
-- Workflow разрешает: "Новая" → "В работе" → "Решена"
-- Нельзя перетащить: "Новая" → "Решена" (минуя "В работе")
+**Example**:
+- Workflow allows: "New" → "In progress" → "Closed"
+- Not allowed: "New" → "Closed" (skipping "In progress")
 
 ### CORS
 
-Redmine может не отдавать CORS-заголовки, из‑за чего браузер блокирует запросы с другого origin.
+Redmine may not send CORS headers, so the browser can block requests from another origin.
 
-**Для разработки** используйте прокси через переменную окружения:
+**For development**, use a proxy via an environment variable:
 
-1. Создайте файл `.env` в корне проекта
-2. Добавьте строку (подставьте URL вашего Redmine):
+1. Create a `.env` file in the project root
+2. Add (replace with your Redmine URL):
 
    ```
    VITE_REDMINE_PROXY_TARGET=http://192.168.15.22:3000
    ```
 
-3. Перезапустите `npm run dev`
-4. В форме входа введите тот же URL Redmine (`http://192.168.15.22:3000`)
+3. Restart `npm run dev`
+4. On the login form, enter the same Redmine URL (`http://192.168.15.22:3000`)
 
-**Важно**: Приложение по умолчанию слушает порт 5173, чтобы не конфликтовать с Redmine на порту 3000. Если Redmine на другом порту — укажите его в `VITE_REDMINE_PROXY_TARGET`. Чтобы вернуть порт 3000 для приложения, добавьте в `.env`: `VITE_DEV_PORT=3000` (тогда Redmine должен быть на другом порту).
+**Note**: The app defaults to port 5173 to avoid conflicting with Redmine on 3000. If Redmine uses another port, set it in `VITE_REDMINE_PROXY_TARGET`. To use port 3000 for the app, add `VITE_DEV_PORT=3000` to `.env` (then Redmine must use a different port).
 
-Запросы пойдут через `localhost`, CORS не будет применяться.
+Requests will go through localhost, so CORS will not apply.
 
-### Пагинация
+### Pagination
 
-Приложение загружает **все** задачи проекта при открытии доски.
-Для больших проектов (>1000 задач) это может занять время.
+The app loads **all** project issues when opening the board. For large projects (>1000 issues) this can take a while.
 
-### Права доступа
+### Permissions
 
-Убедитесь, что ваш API key имеет права:
-- Просмотр проектов
-- Просмотр задач
-- Создание задач
-- Изменение задач (для перемещения между статусами)
+Ensure your API key has:
+- View projects
+- View issues
+- Create issues
+- Edit issues (for moving between statuses)
 
 ## Troubleshooting
 
-**Ошибка "inject() can only be used inside setup()"** и **"Cannot read properties of undefined (reading 'push')"** при выборе проекта — `useRouter()` и другие composables (inject) должны вызываться только в `setup()`, а не в методах. Исправлено: router получается в setup() и используется в методах через `this.router`.
+**"inject() can only be used inside setup()"** and **"Cannot read properties of undefined (reading 'push')"** when selecting a project — `useRouter()` and other composables (inject) must be called only in `setup()`, not in methods. Fixed: router is obtained in setup() and used in methods via `this.router`.
 
-**Ошибка "Cannot read properties of undefined (reading 'push')" на доске** — возникала при быстром переходе со страницы доски во время обновления данных. Исправлена защитой от race condition в KanbanBoard.
+**"Cannot read properties of undefined (reading 'push')" on the board** — occurred when navigating away from the board during refresh. Fixed with race-condition protection in KanbanBoard.
 
-**Ошибка "Объект не может быть пустым" при создании задачи** — возможные причины:
-1. **Трекер**: приложение передаёт трекер автоматически (выбранный или первый в проекте). Убедитесь, что проект имеет хотя бы один трекер (Настройки проекта → Модули → Трекеры).
-2. **Обязательные пользовательские поля**: если в проекте настроены обязательные custom fields, заполните их в веб-интерфейсе Redmine или снимите обязательность в настройках workflow.
+**"Object cannot be empty" when creating an issue** — possible causes:
+1. **Tracker**: the app sends a tracker automatically (selected or first in project). Ensure the project has at least one tracker (Project settings → Modules → Trackers).
+2. **Required custom fields**: if the project has required custom fields, fill them in the Redmine web UI or make them optional in workflow settings.
 
-## Обработка ошибок
+## Error handling
 
-Приложение корректно обрабатывает типичные ошибки:
+The app handles common errors:
 
-- **401** — Неверный API key
-- **403** — Недостаточно прав
-- **404** — Ресурс не найден
-- **422** — Некорректные данные (например, запрещённый переход статуса)
-- **5xx** — Ошибка сервера Redmine
-- **Timeout** — Превышено время ожидания (30 сек)
-- **Network** — Нет связи с сервером
+- **401** — Invalid API key
+- **403** — Insufficient permissions
+- **404** — Resource not found
+- **422** — Invalid data (e.g. disallowed status transition)
+- **5xx** — Redmine server error
+- **Timeout** — Request timeout (30 sec)
+- **Network** — No connection to server
 
-При ошибках отображается баннер с описанием проблемы и кнопкой "Повторить".
+Errors are shown in a banner with a "Retry" button.
 
-## Безопасность
+## Security
 
-⚠️ **API key хранится в localStorage браузера в открытом виде.**
+⚠️ **API key is stored in the browser’s localStorage in plain text.**
 
-Не используйте это приложение на общедоступных компьютерах.
+Do not use this app on shared or public computers.
 
-Для production рекомендуется:
-- HTTPS для Redmine
-- Session-based авторизация вместо API key в localStorage
-- Backend-proxy для скрытия API key
+For production we recommend:
+- HTTPS for Redmine
+- Session-based auth instead of API key in localStorage
+- Backend proxy to hide the API key
 
-## Разработка
+## Development
 
-### Правила кодирования
+### Coding guidelines
 
-- **Иммутабельность**: всегда создавайте новые объекты
-- **Малые файлы**: 200-400 строк, максимум 800
-- **Обработка ошибок**: try-catch для всех async операций
-- **Валидация**: используйте Zod для валидации пользовательского ввода
-- **Без console.log**: используйте нормальные error handlers
+- **Immutability**: always create new objects
+- **Small files**: 200–400 lines, max 800
+- **Error handling**: try-catch for all async operations
+- **Validation**: use Zod for user input
+- **No console.log**: use proper error handlers
 
-## Известные проблемы
+## Known issues
 
-1. При большом количестве задач (>1000) начальная загрузка может быть медленной
-2. Нет фильтрации/поиска задач на доске
-3. Не отображается история изменений задач
-4. Нельзя редактировать существующие задачи (только статус и drag&drop)
+1. With many issues (>1000), initial load can be slow
+2. No issue filtering/search on the board
+3. Issue change history is not shown
+4. Existing issues cannot be edited (only status via drag & drop)
 
 ## Roadmap
 
-- [ ] Фильтрация задач по трекеру, приоритету, исполнителю
-- [ ] Поиск задач на доске
-- [ ] Редактирование задач
-- [ ] Отображение комментариев
-- [ ] Виртуальный скроллинг для больших проектов
-- [ ] Уведомления о изменениях в реальном времени
+- [ ] Filter issues by tracker, priority, assignee
+- [ ] Search issues on the board
+- [ ] Edit issues
+- [ ] Show comments
+- [ ] Virtual scrolling for large projects
+- [ ] Real-time change notifications
 
-## Лицензия
+## License
 
 MIT
 
-## Автор
+## Author
 
-Алексей Ильин
+Aleksei Ilyin

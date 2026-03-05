@@ -1,6 +1,6 @@
 export function normalizeError(error) {
   if (!error) {
-    return 'Неизвестная ошибка'
+    return 'Unknown error'
   }
 
   if (error.response) {
@@ -9,40 +9,40 @@ export function normalizeError(error) {
 
     switch (status) {
       case 401:
-        return 'Неверный API key или доступ запрещен'
+        return 'Invalid API key or access denied'
       case 403:
-        return 'Недостаточно прав для выполнения операции'
+        return 'Insufficient permissions for this operation'
       case 404:
-        return 'Ресурс не найден'
+        return 'Resource not found'
       case 422:
         if (data && data.errors) {
           return formatRedmineErrors(data.errors)
         }
-        return 'Некорректные данные'
+        return 'Invalid data'
       case 500:
       case 502:
       case 503:
-        return 'Ошибка сервера Redmine. Попробуйте позже'
+        return 'Redmine server error. Try again later'
       default:
         if (data && data.errors) {
           return formatRedmineErrors(data.errors)
         }
-        return `Ошибка HTTP ${status}`
+        return `HTTP error ${status}`
     }
   }
 
   if (error.request) {
-    return 'Не удалось связаться с сервером Redmine. Проверьте URL и сеть'
+    return 'Could not reach Redmine server. Check URL and network'
   }
 
   if (error.message) {
     if (error.message.includes('Unexpected token') && error.message.includes('is not valid JSON')) {
-      return 'Сервер вернул HTML вместо JSON. Проверьте URL Redmine — возможно, указан неверный адрес или порт. Убедитесь, что это сервер Redmine, а не приложение Kanban.'
+      return 'Server returned HTML instead of JSON. Check Redmine URL — wrong address or port, or this may be the Kanban app instead of Redmine.'
     }
     return error.message
   }
 
-  return 'Неизвестная ошибка'
+  return 'Unknown error'
 }
 
 function formatRedmineErrors(errors) {
@@ -60,13 +60,15 @@ function formatRedmineErrors(errors) {
     message = String(errors)
   }
 
-  const emptyObjectHint = 'Объект не может быть пустым'
+  const emptyObjectHint = 'Object cannot be empty'
+  const emptyObjectHintRu = 'Объект не может быть пустым'
   const cannotBeEmptyHint = 'cannot be empty'
   if (
     message?.includes(emptyObjectHint) ||
+    message?.includes(emptyObjectHintRu) ||
     message?.toLowerCase().includes(cannotBeEmptyHint)
   ) {
-    return `${message} Проверьте настройки проекта: возможно, есть обязательные пользовательские поля.`
+    return `${message} Check project settings: there may be required custom fields.`
   }
 
   return message

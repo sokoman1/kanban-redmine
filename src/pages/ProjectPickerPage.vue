@@ -3,9 +3,9 @@
     <div class="container">
       <div class="picker-card card">
         <div class="header">
-          <h1>Выберите проект</h1>
+          <h1>Select project</h1>
           <button @click="handleLogout" class="btn btn-secondary btn-sm">
-            Выйти
+            Log out
           </button>
         </div>
 
@@ -20,7 +20,7 @@
         </div>
 
         <div v-else-if="projects.length === 0 && !error" class="empty-state">
-          <p>Проекты не найдены</p>
+          <p>No projects found</p>
         </div>
 
         <div v-else class="projects-list">
@@ -75,7 +75,7 @@ export default {
       const authStore = useAuthStore()
       
       if (!authStore.client) {
-        this.error = 'Клиент не инициализирован'
+        this.error = 'Client is not initialized'
         return
       }
 

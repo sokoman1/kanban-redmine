@@ -42,7 +42,7 @@ export const useBoardStore = defineStore('board', {
       const authStore = useAuthStore()
       
       if (!authStore.client || !authStore.selectedProject) {
-        this.error = 'Не выбран проект или не настроена авторизация'
+        this.error = 'No project selected or authentication not configured'
         return
       }
 
@@ -75,12 +75,12 @@ export const useBoardStore = defineStore('board', {
       const authStore = useAuthStore()
       
       if (!authStore.client) {
-        throw new Error('Клиент не инициализирован')
+        throw new Error('Client is not initialized')
       }
 
       const issueIndex = this.issues.findIndex(i => i.id === issueId)
       if (issueIndex === -1) {
-        throw new Error('Задача не найдена')
+        throw new Error('Issue not found')
       }
 
       const originalIssue = this.issues[issueIndex]
@@ -120,7 +120,7 @@ export const useBoardStore = defineStore('board', {
       const authStore = useAuthStore()
       
       if (!authStore.client || !authStore.selectedProject) {
-        throw new Error('Клиент не инициализирован или проект не выбран')
+        throw new Error('Client is not initialized or project not selected')
       }
 
       const effectiveTrackerId = issueData.tracker_id ?? this.projectTrackers[0]?.id
