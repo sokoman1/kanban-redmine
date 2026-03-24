@@ -45,11 +45,11 @@ export async function fetchAllIssues(client, projectId) {
     const issues = page?.issues ?? []
     allIssues.push(...issues)
 
-    if (allIssues.length >= page.totalCount) {
+    if (!issues.length || allIssues.length >= page.totalCount) {
       break
     }
 
-    offset += limit
+    offset = (page.offset ?? offset) + issues.length
   }
 
   return allIssues
